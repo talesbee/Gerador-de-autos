@@ -24,7 +24,7 @@
                 <Button x:Name="btModelos" Content="Modelos" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="596,65,0,0" VerticalAlignment="Top" Width="143" FontFamily="Times New Roman" FontSize="15"/>
                 <Label Content="Selecionar pasta dos modelos" Grid.Column="1" HorizontalAlignment="Left" Margin="581,40,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14"/>
                 <Label Content="Caminho:" Grid.Column="1" HorizontalAlignment="Left" Margin="583,104,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14"/>
-                <Label x:Name="lbCaminho" Content="." Grid.Column="1" HorizontalAlignment="Left" Margin="581,120,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14"/>
+                <Label x:Name="lbCaminhoLocal" Content="." Grid.Column="1" HorizontalAlignment="Left" Margin="581,120,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14"/>
             </Grid>
         </TabItem>
         <TabItem Header="Dados Gerais" Width="Auto" FontFamily="Times New Roman">
@@ -54,10 +54,10 @@
                     <ColumnDefinition Width="696*"/>
                     <ColumnDefinition Width="97*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btModelos_Copy" Content="Salvar" HorizontalAlignment="Left" Height="36" Margin="609,65,0,0" VerticalAlignment="Top" Width="143" FontFamily="Times New Roman" FontSize="15" Grid.ColumnSpan="2"/>
+                <Button x:Name="btModelos_Copy" Content="Salvar" HorizontalAlignment="Left" Height="36" Margin="609,65,0,0" VerticalAlignment="Top" Width="143" FontFamily="Times New Roman" FontSize="15" Grid.ColumnSpan="2" Click="btModelos_Copy_Click"/>
                 <Label Content="Pasta onde será salvo os arquivos" HorizontalAlignment="Left" Margin="584,38,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14" Grid.ColumnSpan="2"/>
                 <Label Content="Caminho:" HorizontalAlignment="Left" Margin="596,104,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14"/>
-                <Label x:Name="lbCaminho_Copy" Content="." HorizontalAlignment="Left" Margin="594,120,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14"/>
+                <Label x:Name="lbCaminhoSalvar" Content="." HorizontalAlignment="Left" Margin="594,120,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14"/>
                 <Button x:Name="btModelos_Copy1" Content="Gerar Autos" HorizontalAlignment="Left" Height="36" Margin="325,177,0,0" VerticalAlignment="Top" Width="143" FontFamily="Times New Roman" FontSize="15" IsEnabled="False"/>
                 <Label Content="Gerador de Autos" HorizontalAlignment="Left" Margin="295,103,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="30"/>
                 <Label Content="Selecione onde será salvo primeiro" HorizontalAlignment="Left" Margin="301,147,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14"/>
