@@ -36,7 +36,6 @@
                 <Label x:Name="lbCnpjCpf" Content="CNPJ/CPF" HorizontalAlignment="Left" Margin="326,50,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <TextBox x:Name="txCnpjCpf" HorizontalAlignment="Left" Margin="342,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180" FontSize="14" TabIndex="1"/>
                 <Label x:Name="lbData" Content="Data" HorizontalAlignment="Left" Margin="525,50,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txData" HorizontalAlignment="Left" Margin="541,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="14" TabIndex="2"/>
                 <Label x:Name="lbEnderecoComercial" Content="Endereço do Empreendimento" HorizontalAlignment="Left" Margin="8,92,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <TextBox x:Name="txEnderecoComercial" HorizontalAlignment="Left" Margin="24,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="301" FontSize="14" TabIndex="4"/>
                 <Label x:Name="lbMunicipio" Content="Município" HorizontalAlignment="Left" Margin="326,92,0,0" VerticalAlignment="Top" FontSize="16"/>
@@ -63,6 +62,7 @@
                 <TextBox x:Name="txCEP" HorizontalAlignment="Left" Margin="542,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" FontSize="14" TabIndex="14"/>
                 <Label x:Name="lbTelefone" Content="Telefone" HorizontalAlignment="Left" Margin="11,218,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <TextBox x:Name="txTelefone" HorizontalAlignment="Left" Margin="27,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14" TabIndex="15"/>
+                <DatePicker x:Name="dpData" HorizontalAlignment="Left" Margin="537,72,0,0" VerticalAlignment="Top"/>
             </Grid>
         </TabItem>
         <TabItem x:Name="tbInfracao" Header="Auto de Infração" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" FontFamily="Times New Roman" TabIndex="16" Visibility="Collapsed">
