@@ -88,6 +88,7 @@ namespace Gerador_de_autos
                         cbEmbargo.IsEnabled = true;
                         lbModelos.Visibility = Visibility.Collapsed;
                     }
+                   
                     
                 }
                 if (cbEmbargo.IsEnabled == false && cbDeposito.IsEnabled == false && cbApreensao.IsEnabled == false && cbNotificacao.IsEnabled == false && cbInspecao.IsEnabled == false && cbInfracao.IsEnabled == false)
@@ -132,7 +133,23 @@ namespace Gerador_de_autos
 
         private void gerarLaudos(object sender, RoutedEventArgs e)
         {
+            if (cbModoLivre.IsChecked.Value)
+            {
+                CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+                dialog.InitialDirectory = "C:\\Users";
+                dialog.IsFolderPicker = true;
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    DirectoryInfo diretorio = new DirectoryInfo(dialog.FileName);
+                    FileInfo[] Arquivos = diretorio.GetFiles("*.*");
+                    LocalModelos = dialog.FileName;
+                }
+                    
+            }
+            else
+            {
 
+            }
         }
 
         private void buscarSalvar(object sender, RoutedEventArgs e)
@@ -170,6 +187,49 @@ namespace Gerador_de_autos
                 lbCaminhoSalvar.Content = ".";
                 lbOndeSalvar.Visibility = Visibility.Visible;
             }
+        }
+
+      
+
+        private void mudarLivre(bool valor)
+        {
+
+            cbMesmoLocal.IsEnabled = !valor;
+            btModelos.IsEnabled = !valor;
+            visibleComponent(tbApreensao, valor);
+            visibleComponent(tbInspecao, valor);
+            visibleComponent(tbInfracao, valor);
+            visibleComponent(tbEmbargo, valor);
+            visibleComponent(tbDeposito, valor);
+            visibleComponent(tbNotificacao, valor);
+            
+            if (valor)
+            {
+                lbSelecionarLivre.Visibility = Visibility.Visible;
+                lbModelos.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                tbDados.Visibility = Visibility.Collapsed;
+                tbGerar.Visibility = Visibility.Collapsed;
+                lbSelecionarLivre.Visibility = Visibility.Collapsed;
+                lbModelos.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void checkLivre(object sender, RoutedEventArgs e)
+        {
+            mudarLivre(cbModoLivre.IsChecked.Value);
+        }
+
+        private void clickInformacao(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine("clicou na foto");
+        }
+
+        private void calculoMulta(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
 
 
