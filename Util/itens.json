@@ -1,0 +1,42 @@
+{
+  "atos": {
+    "gerais": {
+      "nome":,
+      "cpf":,
+      "data":,
+      "hora":,
+      "filicao":,
+      "atividade":,
+      "endeE":,
+      "muniE":,
+      "ufE":,
+      "areaE":,
+      "coord":,
+      "lat":,
+      "long":,
+      "endeC":,
+      "muniC":,
+      "ufC":,
+      "cep":,
+      "tel":,
+      "nomeR":,
+      "cpfR":,
+    }
+    "infracao": {
+      "arquivo": "Auto de Infração.docx",
+      "dados": {
+        "n":,
+        "desmate":,
+        "explorado":,
+        "rt":,
+        "ocorrencia":,
+        "multa":,
+        "multaExt":,
+        "dispo":,
+        "descri":,
+      }
+
+    }
+  }
+
+}

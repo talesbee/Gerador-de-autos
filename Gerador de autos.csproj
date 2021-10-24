@@ -33,10 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Util\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="informacao.png" />
     <Resource Include="informacao2.png" />
   </ItemGroup>

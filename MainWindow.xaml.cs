@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Xceed.Words.NET;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.IO;
+using Color = System.Drawing.Color;
 
 namespace Gerador_de_autos
 {
@@ -31,20 +32,108 @@ namespace Gerador_de_autos
 
         }
 
-        private void btModelos_Copy_Click(object sender, RoutedEventArgs e)
+        private void InicialConfig(bool status)
         {
+            tbInfracao.Visibility = Visibility.Hidden;
+            tbInspecao.Visibility = Visibility.Hidden;
+            tbNotificacao.Visibility = Visibility.Hidden;
+            tbApreensao.Visibility = Visibility.Hidden;
+            tbDeposito.Visibility = Visibility.Hidden;
+            tbEmbargo.Visibility = Visibility.Hidden;
+            tbGerar.Visibility = Visibility.Hidden;
+            tbDados.Visibility = Visibility.Hidden;
+
+            cbInfracao.IsEnabled = status;
+            cbInspecao.IsEnabled = status;
+            cbNotificacao.IsEnabled = status;
+            // cbApreensao.IsEnabled = status;
+            //cbDeposito.IsEnabled = status;
+            //cbEmbargo.IsEnabled = status;
+
+            cbInfracao.IsChecked = false;
+            cbInspecao.IsChecked = false;
+            cbNotificacao.IsChecked = false;
+            // cbApreensao.IsChecked = status;
+            //cbDeposito.IsChecked = status;
+            // cbEmbargo.IsChecked = status;
+
+
+            if (!status)
+            {
+                lbModelos.Content = "Primeiro selecione a pasta onde estão os Modelos";
+                lbModelos.Foreground = System.Windows.Media.Brushes.Red;
+                lbModelos.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lbModelos.Visibility = Visibility.Hidden;
+            }
+
+        }
+
+        private bool arquivosEncontrados(FileInfo[] arquivos)
+        {
+            var encontrados = 0;
+            foreach (FileInfo fileinfo in arquivos)
+            {
+                if (fileinfo.Name == "Auto de Infração.docx")
+                {
+                    cbInfracao.IsEnabled = true;
+                    encontrados++;
+                }
+                else if (fileinfo.Name == "Auto de Inspeção.docx")
+                {
+                    cbInspecao.IsEnabled = true;
+                    encontrados++;
+                }
+                else if (fileinfo.Name == "Notificação.docx")
+                {
+                    cbNotificacao.IsEnabled = true;
+                    encontrados++;
+                }
+                else if (fileinfo.Name == "Termo de Apreensão.docx")
+                {
+                    cbApreensao.IsEnabled = true;
+                    encontrados++;
+                }
+                else if (fileinfo.Name == "Termo de Depósito.doc")
+                {
+                    cbDeposito.IsEnabled = true;
+                    encontrados++;
+                }
+                else if (fileinfo.Name == "Termo de Embargo.docx")
+                {
+                    cbEmbargo.IsEnabled = true;
+                    encontrados++;
+
+                }
+
+            }
+            if (cbEmbargo.IsEnabled == false && cbDeposito.IsEnabled == false && cbApreensao.IsEnabled == false && cbNotificacao.IsEnabled == false && cbInspecao.IsEnabled == false && cbInfracao.IsEnabled == false)
+            {
+                lbModelos.Visibility = Visibility.Visible;
+            }
+
+            if (encontrados > 0)
+            {
+                lbModelos.Content = "Modelos Localizados!";
+                lbModelos.Foreground = System.Windows.Media.Brushes.Green;
+                return true;
+            }
+            else
+            {
+                lbModelos.Content = "Nenhum Modelo correspondente!";
+                lbModelos.Foreground = System.Windows.Media.Brushes.Red;
+                return false;
+            }
 
         }
 
         //Desativa as checkBox, verifica os arquivos na pasta selecionada, ativa as checkBox para cada arquivo encontrado.
         private void buscarModelos(object sender, RoutedEventArgs e)
         {
-            cbInfracao.IsEnabled = false;
-            cbInspecao.IsEnabled = false;
-            cbNotificacao.IsEnabled = false;
-            cbApreensao.IsEnabled = false;
-            cbDeposito.IsEnabled = false;
-            cbEmbargo.IsEnabled = false;
+            InicialConfig(false);
+
 
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             dialog.InitialDirectory = "C:\\Users";
@@ -56,45 +145,8 @@ namespace Gerador_de_autos
                 LocalModelos = dialog.FileName;
                 lbCaminhoLocal.Content = LocalModelos;
 
-                foreach (FileInfo fileinfo in Arquivos)
-                {
-                    if (fileinfo.Name == "Auto de Infração.docx")
-                    {
-                        cbInfracao.IsEnabled = true;
-                        lbModelos.Visibility = Visibility.Collapsed;
-                    }
-                    else if (fileinfo.Name == "Auto de Inspeção.docx")
-                    {
-                        cbInspecao.IsEnabled = true;
-                        lbModelos.Visibility = Visibility.Collapsed;
-                    }
-                    else if (fileinfo.Name == "Notificação.docx")
-                    {
-                        cbNotificacao.IsEnabled = true;
-                        lbModelos.Visibility = Visibility.Collapsed;
-                    }
-                    else if (fileinfo.Name == "Termo de Apreensão.docx")
-                    {
-                        cbApreensao.IsEnabled = true;
-                        lbModelos.Visibility = Visibility.Collapsed;
-                    }
-                    else if (fileinfo.Name == "Termo de Depósito.doc")
-                    {
-                        cbDeposito.IsEnabled = true;
-                        lbModelos.Visibility = Visibility.Collapsed;
-                    }
-                    else if (fileinfo.Name == "Termo de Embargo.docx")
-                    {
-                        cbEmbargo.IsEnabled = true;
-                        lbModelos.Visibility = Visibility.Collapsed;
-                    }
-                   
-                    
-                }
-                if (cbEmbargo.IsEnabled == false && cbDeposito.IsEnabled == false && cbApreensao.IsEnabled == false && cbNotificacao.IsEnabled == false && cbInspecao.IsEnabled == false && cbInfracao.IsEnabled == false)
-                {
-                    lbModelos.Visibility = Visibility.Visible;
-                }
+                if (!arquivosEncontrados(Arquivos))
+                    lbModelos.Content = "";
             }
 
         }
@@ -111,7 +163,7 @@ namespace Gerador_de_autos
             {
                 labol.Visibility = Visibility.Collapsed;
             }
-            
+
         }
 
         private void CheckBoxClick(object sender, RoutedEventArgs e)
@@ -131,32 +183,14 @@ namespace Gerador_de_autos
             }
         }
 
-        private void gerarLaudos(object sender, RoutedEventArgs e)
-        {
-            if (cbModoLivre.IsChecked.Value)
-            {
-                CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-                dialog.InitialDirectory = "C:\\Users";
-                dialog.IsFolderPicker = true;
-                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
-                {
-                    DirectoryInfo diretorio = new DirectoryInfo(dialog.FileName);
-                    FileInfo[] Arquivos = diretorio.GetFiles("*.*");
-                    LocalModelos = dialog.FileName;
-                }
-                    
-            }
-            else
-            {
 
-            }
-        }
 
         private void buscarSalvar(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             dialog.InitialDirectory = "C:\\Users";
             dialog.IsFolderPicker = true;
+
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 LocalModelos = dialog.FileName;
@@ -175,51 +209,63 @@ namespace Gerador_de_autos
         {
             if (cbMesmoLocal.IsChecked.Value)
             {
-                btSalvar1.IsEnabled = false;
+                btSalvar.IsEnabled = false;
                 lbCaminhoSalvar.Content = LocalModelos;
                 btGerarLaudos.IsEnabled = true;
                 lbOndeSalvar.Visibility = Visibility.Collapsed;
             }
             else
             {
-                btSalvar1.IsEnabled = true;
+                btSalvar.IsEnabled = true;
                 btGerarLaudos.IsEnabled = false;
                 lbCaminhoSalvar.Content = ".";
                 lbOndeSalvar.Visibility = Visibility.Visible;
             }
         }
 
-      
 
-        private void mudarLivre(bool valor)
+        private void mostrarLivre(bool valor)
         {
-
-            cbMesmoLocal.IsEnabled = !valor;
-            btModelos.IsEnabled = !valor;
-            visibleComponent(tbApreensao, valor);
-            visibleComponent(tbInspecao, valor);
-            visibleComponent(tbInfracao, valor);
-            visibleComponent(tbEmbargo, valor);
-            visibleComponent(tbDeposito, valor);
-            visibleComponent(tbNotificacao, valor);
-            
+            var modo = Visibility;
             if (valor)
             {
-                lbSelecionarLivre.Visibility = Visibility.Visible;
-                lbModelos.Visibility = Visibility.Collapsed;
+                modo = Visibility.Visible;
             }
             else
             {
-                tbDados.Visibility = Visibility.Collapsed;
-                tbGerar.Visibility = Visibility.Collapsed;
-                lbSelecionarLivre.Visibility = Visibility.Collapsed;
-                lbModelos.Visibility = Visibility.Visible;
+                modo = Visibility.Hidden;
             }
+
+            lbGeralLivre.Visibility = modo;
+            cbGeralLivre.Visibility = modo;
+
+            lbInfraLivre.Visibility = modo;
+            cbInfraLivre.Visibility = modo;
+
+            lbInspLivre.Visibility = modo;
+            cbInspLivre.Visibility = modo;
+
+            lbNotLivre.Visibility = modo;
+            cbNotLivre.Visibility = modo;
+
+            lbApreLivre.Visibility = modo;
+            cbApreLivre.Visibility = modo;
+
+            lbDepLivre.Visibility = modo;
+            cbDepLivre.Visibility = modo;
+
+            lbEmbLivre.Visibility = modo;
+            cbEmbLivre.Visibility = modo;
         }
 
         private void checkLivre(object sender, RoutedEventArgs e)
         {
-            mudarLivre(cbModoLivre.IsChecked.Value);
+
+            InicialConfig(cbModoLivre.IsChecked.Value);
+            btModelos.IsEnabled = !cbModoLivre.IsChecked.Value;
+            cbMesmoLocal.Visibility = Visibility.Collapsed;
+
+            // mostrarLivre(cbModoLivre.IsChecked.Value);
         }
 
         private void clickInformacao(object sender, MouseButtonEventArgs e)
@@ -230,6 +276,117 @@ namespace Gerador_de_autos
         private void calculoMulta(object sender, DependencyPropertyChangedEventArgs e)
         {
 
+        }
+
+        private void salvarDoc(DocX doc, string local, string laudo)
+        {
+            Console.WriteLine("Salvando!");
+            doc.SaveAs(local + laudo);
+        }
+
+        private void replaceGeral(DocX doc)
+        {
+            doc.ReplaceText("#NomeAutuado", txNome.Text);
+            doc.ReplaceText("#CNPJ_CPFAutuado", txCnpjCpf.Text);
+            doc.ReplaceText("#DataDoAuto", dpData.Text);
+            doc.ReplaceText("#horarioInfração", txHora.Text);
+            doc.ReplaceText("#NomeDaMae", txFiliacao.Text);
+            doc.ReplaceText("#Atividade", txAtividade.Text);
+            doc.ReplaceText("#EnderecoEmpreendimento", txEnderecoComercial.Text);
+            doc.ReplaceText("#MunicipioEmpreendimento", txMunicipio.Text);
+            doc.ReplaceText("#UfEmpreendimento", txUf.Text);
+            doc.ReplaceText("#AreaEmpreendimento", txAreaEmpreendimento.Text);
+            doc.ReplaceText("#Coordenada", txCoordenada.Text);
+            doc.ReplaceText("#Latitude ", txLat.Text);
+            doc.ReplaceText("#Longitude", txLong.Text);
+            doc.ReplaceText("#EnderecoCorrespondencia", txEnderecoCorrespondencia.Text);
+            doc.ReplaceText("#MunicipioCorrespondencia", txMunicipioCorrespondencia.Text);
+            doc.ReplaceText("#UfCorrespondencia", txUfCorrespondencia.Text);
+            doc.ReplaceText("#CEPCorrespondencia", txCEP.Text);
+            doc.ReplaceText("#Telefone", txTelefone.Text);
+            doc.ReplaceText("#RepresentanteLegal", txNomeRepresentante.Text);
+        }
+
+        private void replaceInfra(DocX infra)
+        {
+            infra.ReplaceText("#nAutoInfracao", txInfraNumero.Text);
+            infra.ReplaceText("#AreaDesmate", txInfraAreaDesmate.Text);
+            infra.ReplaceText("#RelatorioTecnico", txInfraRelatorio.Text);
+            infra.ReplaceText("#AreaExplocacaoSeletiva", txInfraAreaExploracao.Text);
+            infra.ReplaceText("#Descricao", lbInfraOcorrencia.Text);
+            infra.ReplaceText("#ValorMultaExtenso", txInfraMultaExtenso.Text);
+            infra.ReplaceText("#DispositivosLegais", txInfraDispositivosInfri.Text);
+            infra.ReplaceText("#DescicaoMulta", lbInfraDescriMulta.Text);
+            infra.ReplaceText("#ValorMulta", txInfraMulta.Text);
+        }
+
+        private void replaceNot(DocX Not)
+        {
+            Not.ReplaceText("#nNotificacao", txNotNumero.Text);
+            Not.ReplaceText("#protocoloNotificacao", txNotProcesso.Text);
+            Not.ReplaceText("#Objetivo", lbNotObjetivo.Text);
+            Not.ReplaceText("#TxtNotif", lbNotNotificacao.Text);
+            Not.ReplaceText("#AreaFDesmate", txNotFlorDesmate.Text);
+            Not.ReplaceText("#ReposicaoFloresta", txNotFlorRep.Text);
+            Not.ReplaceText("#AreaCDesmate", txNotCerDesmate.Text);
+            Not.ReplaceText("#ReposicaoCerrado", txNotCerRep.Text);
+            Not.ReplaceText("#TotalHectareDesmate", txNotTDesmate.Text);
+            Not.ReplaceText("#TotalReposicaoM3", txNotTRep.Text);
+        }
+
+        private void replaceInspe(DocX Insp)
+        {
+            Insp.ReplaceText("#nAutoinspecao", txInspNumero.Text);
+            Insp.ReplaceText("#Objetivo", lbInspObj.Text);
+            Insp.ReplaceText("#Constatações", lbInspConsta.Text);
+        }
+
+        private void replaceDocumento(string local)
+        {
+            DocX documento;
+            string nome;
+            if (cbInfracao.IsChecked.Value)
+            {
+                string arq = local + "\\Auto de Infração.docx";
+                documento = DocX.Load(arq);
+                replaceGeral(documento);
+                replaceInfra(documento);
+                Console.WriteLine(local);
+                nome = @"Auto de Infração - " + txInfraNumero.Text + ".docx";
+                arq = local + "\\";
+                salvarDoc(documento, arq, nome);
+            }
+            if (cbNotificacao.IsChecked.Value)
+            {
+                string arq = local + "\\Notificação.docx";
+                documento = DocX.Load(arq);
+                replaceGeral(documento);
+                replaceNot(documento);
+                Console.WriteLine(local);
+                nome = @"Notificação - " + txNotNumero.Text + ".docx";
+                arq = local + "\\";
+                salvarDoc(documento, arq, nome);
+            }
+            if (cbInspecao.IsChecked.Value)
+            {
+                string arq = local + "\\Auto de Inspeção.docx";
+                documento = DocX.Load(arq);
+                replaceGeral(documento);
+                replaceInspe(documento);
+                Console.WriteLine(local);
+                nome = @"Auto de Inspeção - " + txInspNumero.Text + ".docx";
+                arq = local + "\\";
+                salvarDoc(documento, arq, nome);
+            }
+
+        }
+        private void gerarLaudos(object sender, RoutedEventArgs e)
+        {
+            string local = lbCaminhoSalvar.Content.ToString();
+            if (!local.Equals("."))
+            {
+                replaceDocumento(local);
+            }
         }
 
 
