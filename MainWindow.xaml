@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gerador_de_autos"
         mc:Ignorable="d"
-        Title="Gerador de Autos" Height="450" Width="800" ResizeMode="NoResize" SizeToContent="Width">
+        Title="Preenchedor de Autos" Height="450" Width="796" ResizeMode="NoResize" SizeToContent="Width">
     <TabControl x:Name="btSalvar" HorizontalAlignment="Center" Height="434" Margin="0,1,0,0" VerticalAlignment="Top" Width="799">
         <TabItem Header="Menu" FontFamily="Times New Roman" TabIndex="0" IsSelected="True">
-            <Grid Background="#FFE5E5E5">
+            <Grid Background="#FFE5E5E5" Height="407" Margin="0,0,-2,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="13*"/>
                     <ColumnDefinition Width="720*"/>
@@ -20,7 +20,7 @@
                 <CheckBox x:Name="cbApreensao" Content="Termo de Apreensão" HorizontalAlignment="Left" Height="24" Margin="229,205,0,0" VerticalAlignment="Top" Width="208" Grid.Column="1" FontFamily="Times New Roman" FontSize="18" TabIndex="5" IsEnabled="False" Click="CheckBoxClick"/>
                 <CheckBox x:Name="cbDeposito" Content="Termo de Depósito" HorizontalAlignment="Left" Height="24" Margin="229,229,0,0" VerticalAlignment="Top" Width="188" Grid.Column="1" FontFamily="Times New Roman" FontSize="18" TabIndex="6" IsEnabled="False" Click="CheckBoxClick"/>
                 <CheckBox x:Name="cbEmbargo" Content="Termo de Embargo" HorizontalAlignment="Left" Height="23" Margin="229,254,0,0" VerticalAlignment="Top" Width="202" Grid.Column="1" FontFamily="Times New Roman" FontSize="18" TabIndex="7" IsEnabled="False" Click="CheckBoxClick"/>
-                <Label Content="Gerador de Autos" Grid.Column="1" HorizontalAlignment="Left" Margin="247,47,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="30"/>
+                <Label Content="Preenchedor de Autos" Grid.Column="1" HorizontalAlignment="Center" Margin="0,48,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="30"/>
                 <Label Content="Selecione os autos a serem preenchidos" Grid.Column="1" HorizontalAlignment="Left" Margin="201,80,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="20"/>
                 <Button x:Name="btModelos" Content="Modelos" Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="596,65,0,0" VerticalAlignment="Top" Width="143" FontFamily="Times New Roman" FontSize="15" Grid.ColumnSpan="2" Click="buscarModelos" TabIndex="1"/>
                 <Label Content="Selecionar pasta dos modelos" Grid.Column="1" HorizontalAlignment="Left" Margin="581,40,0,0" VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14" Grid.ColumnSpan="2"/>
@@ -46,7 +46,7 @@
                 <Label x:Name="lbAreaEmpreendimento" Content="Área do Empreendimento" HorizontalAlignment="Left" Margin="523,122,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <TextBox x:Name="txAreaEmpreendimento" HorizontalAlignment="Left" Margin="531,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" FontSize="14" TabIndex="9"/>
                 <Label x:Name="lbHora" Content="Horário" HorizontalAlignment="Left" Margin="654,30,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txHora" HorizontalAlignment="Left" Margin="664,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="14" TabIndex="4"/>
+                <TextBox x:Name="txHora" HorizontalAlignment="Left" Margin="664,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" FontSize="14" TabIndex="3"/>
                 <Label x:Name="lbCoordenada" Content="Coordenadas Geográficas" HorizontalAlignment="Left" Margin="10,168,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <TextBox x:Name="txCoordenada" HorizontalAlignment="Left" Margin="22,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="188" FontSize="14" TabIndex="10"/>
                 <Label x:Name="lbLat" Content="Lat.(S)" HorizontalAlignment="Left" Margin="223,168,0,0" VerticalAlignment="Top" FontSize="16"/>
@@ -63,50 +63,113 @@
                 <TextBox x:Name="txCEP" HorizontalAlignment="Left" Margin="538,242,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" FontSize="14" TabIndex="16"/>
                 <Label x:Name="lbTelefone" Content="Telefone" HorizontalAlignment="Left" Margin="9,260,0,0" VerticalAlignment="Top" FontSize="16"/>
                 <TextBox x:Name="txTelefone" HorizontalAlignment="Left" Margin="25,284,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14" TabIndex="17"/>
-                <DatePicker x:Name="dpData" HorizontalAlignment="Left" Margin="531,58,0,0" VerticalAlignment="Top" TabIndex="3" Height="18" Width="122" FontSize="10"/>
+                <DatePicker x:Name="dpData" HorizontalAlignment="Left" Margin="531,58,0,0" VerticalAlignment="Top" TabIndex="2" Height="18" Width="122" FontSize="10"/>
                 <Image x:Name="imgInformacaoGeral" HorizontalAlignment="Left" Height="19" Margin="772,3,0,0" VerticalAlignment="Top" Width="19" Source="/informacao2.png" MouseDown="clickInformacao"/>
-                <Label x:Name="lbNome_Copy" Content="Filiação (Pessoa Fisica) Mãe:" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txNome_Copy" HorizontalAlignment="Left" Margin="22,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" FontSize="14" TabIndex="5"/>
+                <Label x:Name="lbNome_Copy" Content="Filiação (Pessoa Fisica) Mãe" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNome_Copy" HorizontalAlignment="Left" Margin="22,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" FontSize="14" TabIndex="4"/>
+                <Label x:Name="lbNome_Copy1" Content="Atividade" HorizontalAlignment="Left" Margin="325,76,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txAtividade" HorizontalAlignment="Left" Margin="339,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" FontSize="14" TabIndex="5"/>
+                <Label x:Name="lbGeralLivre" Content="Livre" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFFD0000" FontWeight="Bold" FontSize="14"/>
+                <CheckBox x:Name="cbGeralLivre" Content="Mostrar #" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Foreground="Red"/>
+                <Label x:Name="lbTelefone_Copy" Content="Nome do representante" HorizontalAlignment="Left" Margin="221,260,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNomeRepresentante" HorizontalAlignment="Left" Margin="237,284,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14" TabIndex="18"/>
+                <Label x:Name="lbTelefone_Copy1" Content="CPF representante" HorizontalAlignment="Left" Margin="438,260,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txCPFRepresentante" HorizontalAlignment="Left" Margin="454,284,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="192" FontSize="14" TabIndex="19"/>
             </Grid>
         </TabItem>
         <TabItem x:Name="tbInfracao" Header="Auto de Infração" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" FontFamily="Times New Roman" TabIndex="16" Visibility="Visible">
             <Grid Background="#FFE5E5E5">
-                <Image x:Name="imgInformacaoInfra" HorizontalAlignment="Left" Height="19" Margin="772,3,0,0" VerticalAlignment="Top" Width="19" Source="/informacao2.png" MouseDown="clickInformacao"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="77*"/>
+                    <ColumnDefinition Width="717*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="imgInformacaoInfra" HorizontalAlignment="Left" Height="19" Margin="696,3,0,0" VerticalAlignment="Top" Width="19" Source="/informacao2.png" MouseDown="clickInformacao" Grid.Column="1"/>
                 <Label x:Name="lbNumero" Content="Nº:" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txNumero" HorizontalAlignment="Left" Margin="22,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="0"/>
-                <TextBox x:Name="lbTextoInfra" HorizontalAlignment="Left" Margin="37,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="321" Height="106" UndoLimit="0"/>
-                <Label x:Name="lbNumero_Copy" Content="Descrição da Ocorrência:" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <Label x:Name="lbNumero_Copy1" Content="Área Desmate:" HorizontalAlignment="Left" Margin="22,104,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txAreaDesmate" HorizontalAlignment="Left" Margin="37,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" FontSize="14" TabIndex="0" DataContextChanged="calculoMulta"/>
-                <Label x:Name="lbNumero_Copy2" Content="Relatório Técnico:" HorizontalAlignment="Left" Margin="134,104,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txRelatorio" HorizontalAlignment="Left" Margin="150,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" FontSize="14" TabIndex="0"/>
-                <Button x:Name="btTextoInfra" Content="Preencher" HorizontalAlignment="Left" Height="20" Margin="187,167,0,0" VerticalAlignment="Top" Width="76" FontFamily="Times New Roman" Click="buscarModelos" TabIndex="1"/>
-                <Label x:Name="lbNumero_Copy3" Content="Valor da Multa:" HorizontalAlignment="Left" Margin="369,76,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <Label x:Name="lbNumero_Copy4" Content="Valor por HA:" HorizontalAlignment="Left" Margin="384,104,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txValorHA" HorizontalAlignment="Left" Margin="399,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" FontSize="14" TabIndex="0" Text="5000"/>
-                <Label x:Name="lbNumero_Copy5" Content="Total (automático):" HorizontalAlignment="Left" Margin="492,104,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txInfraMulta" HorizontalAlignment="Left" Margin="507,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117" FontSize="14" TabIndex="0"/>
-                <Label x:Name="lbNumero_Copy6" Content="Total por Extenso:" HorizontalAlignment="Left" Margin="384,150,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txInfraMultaExtenso" HorizontalAlignment="Left" Margin="399,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="14" TabIndex="0"/>
-                <Label x:Name="lbNumero_Copy7" Content="Área Exploração:" HorizontalAlignment="Left" Margin="22,150,0,0" VerticalAlignment="Top" FontSize="16"/>
-                <TextBox x:Name="txAreaExploracao" HorizontalAlignment="Left" Margin="37,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" FontSize="14" TabIndex="0" DataContextChanged="calculoMulta"/>
-                <Label x:Name="lbNumero_Copy8" Content="Texto Gerado:" HorizontalAlignment="Left" Margin="22,196,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txInfraNumero" HorizontalAlignment="Left" Margin="22,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="0" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="lbInfraOcorrencia" HorizontalAlignment="Left" Margin="37,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" Height="94" UndoLimit="0" Grid.ColumnSpan="2" TabIndex="9"/>
+                <Label x:Name="lbNumero_Copy" Content="Descrição da Ocorrência:" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2"/>
+                <Label x:Name="lbNumero_Copy1" Content="Área Desmate:" HorizontalAlignment="Left" Margin="22,104,0,0" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txInfraAreaDesmate" HorizontalAlignment="Left" Margin="37,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" FontSize="14" TabIndex="1" DataContextChanged="calculoMulta" Grid.ColumnSpan="2"/>
+                <Label x:Name="lbNumero_Copy2" Content="Relatório Técnico:" HorizontalAlignment="Left" Margin="58,104,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+                <TextBox x:Name="txInfraRelatorio" HorizontalAlignment="Left" Margin="74,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" FontSize="14" TabIndex="2" Grid.Column="1"/>
+                <Button x:Name="btInfraPreencher" Content="Gerar Texto" HorizontalAlignment="Left" Height="20" Margin="110,167,0,0" VerticalAlignment="Top" Width="76" FontFamily="Times New Roman" Click="buscarModelos" TabIndex="1" Grid.Column="1"/>
+                <Label x:Name="lbNumero_Copy3" Content="Valor da Multa:" HorizontalAlignment="Left" Margin="292,76,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+                <Label x:Name="lbNumero_Copy4" Content="Valor por HA:" HorizontalAlignment="Center" Margin="0,104,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+                <TextBox x:Name="txInfraValorHA" HorizontalAlignment="Left" Margin="322,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" FontSize="14" TabIndex="4" Text="5000" Grid.Column="1"/>
+                <Label x:Name="lbNumero_Copy5" Content="Total (automático):" HorizontalAlignment="Left" Margin="416,104,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+                <TextBox x:Name="txInfraMulta" HorizontalAlignment="Left" Margin="430,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117" FontSize="14" TabIndex="5" Grid.Column="1"/>
+                <Label x:Name="lbNumero_Copy6" Content="Total por Extenso:" HorizontalAlignment="Left" Margin="308,150,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+                <TextBox x:Name="txInfraMultaExtenso" HorizontalAlignment="Left" Margin="322,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="315" FontSize="14" TabIndex="6" Grid.Column="1"/>
+                <Label x:Name="lbNumero_Copy7" Content="Área Exploração:" HorizontalAlignment="Left" Margin="22,150,0,0" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txInfraAreaExploracao" HorizontalAlignment="Left" Margin="37,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94" FontSize="14" TabIndex="3" DataContextChanged="calculoMulta" Grid.ColumnSpan="2"/>
+                <Label x:Name="lbNumero_Copy8" Content="Ocorrência:" HorizontalAlignment="Left" Margin="22,198,0,0" VerticalAlignment="Top" FontSize="16" Grid.ColumnSpan="2"/>
+                <CheckBox x:Name="cbInfraDesmate" Content="Desmatamento" Grid.Column="1" HorizontalAlignment="Left" Margin="77,205,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="lbNumero_Copy9" Content="Dispositivos legais infringidos:" HorizontalAlignment="Left" Margin="308,199,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+                <TextBox x:Name="txInfraDispositivosInfri" HorizontalAlignment="Left" Margin="322,227,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="315" FontSize="14" TabIndex="7" Grid.Column="1"/>
+                <Label x:Name="lbNumero_Copy10" Content="Descrição do valor da multa:" HorizontalAlignment="Left" Margin="308,245,0,0" VerticalAlignment="Top" FontSize="16" Grid.Column="1"/>
+                <TextBox x:Name="lbInfraDescriMulta" HorizontalAlignment="Left" Margin="322,278,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="315" Height="42" UndoLimit="0" Grid.Column="1" TabIndex="8"/>
+                <Label x:Name="lbInfraLivre" Content="Livre" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFFD0000" FontWeight="Bold" FontSize="14"/>
+                <CheckBox x:Name="cbInfraLivre" Content="Mostrar #" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Foreground="Red" Grid.ColumnSpan="2"/>
             </Grid>
         </TabItem>
-        <TabItem x:Name="tbInspecao" Header="Auto de Inspeção" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" FontFamily="Times New Roman" Visibility="Collapsed">
-            <Grid Background="#FFE5E5E5"/>
+        <TabItem x:Name="tbInspecao" Header="Auto de Inspeção" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" FontFamily="Times New Roman" Visibility="Visible">
+            <Grid Background="#FFE5E5E5">
+                <Label x:Name="lbInspLivre" Content="Livre" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFFD0000" FontWeight="Bold" FontSize="14"/>
+                <CheckBox x:Name="cbInspLivre" Content="Mostrar #" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Foreground="Red"/>
+                <Label x:Name="lbNumero_Copy23" Content="Nº:" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txInspNumero" HorizontalAlignment="Left" Margin="22,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="0"/>
+                <TextBox x:Name="lbInspOcorrencia" HorizontalAlignment="Left" Margin="25,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" Height="94" UndoLimit="0" TabIndex="1"/>
+                <Label x:Name="lbNumero_Copy24" Content="Objetivo:" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="lbInspConsta" HorizontalAlignment="Left" Margin="338,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" Height="94" UndoLimit="0" TabIndex="2"/>
+                <Label x:Name="lbNumero_Copy25" Content="Constatações:" HorizontalAlignment="Left" Margin="323,81,0,0" VerticalAlignment="Top" FontSize="16"/>
+            </Grid>
         </TabItem>
-        <TabItem x:Name="tbNotificacao" Header="Notificação" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Visibility="Collapsed">
-            <Grid Background="#FFE5E5E5"/>
+        <TabItem x:Name="tbNotificacao" Header="Notificação" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Visibility="Visible" FontFamily="Times New Roman">
+            <Grid Background="#FFE5E5E5">
+                <Label x:Name="lbNotLivre" Content="Livre" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFFD0000" FontWeight="Bold" FontSize="14"/>
+                <CheckBox x:Name="cbNotLivre" Content="Mostrar #" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Foreground="Red"/>
+                <Label x:Name="lbNumero_Copy11" Content="Nº:" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNotNumero" HorizontalAlignment="Left" Margin="22,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="0"/>
+                <Label x:Name="lbNumero_Copy12" Content="Nº do Processo Sema:" HorizontalAlignment="Left" Margin="187,30,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNotProcesso" HorizontalAlignment="Left" Margin="199,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="1"/>
+                <TextBox x:Name="lbNotObjetivo" HorizontalAlignment="Left" Margin="25,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" Height="94" UndoLimit="0" TabIndex="2"/>
+                <Label x:Name="lbNumero_Copy13" Content="Objetivo:" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="lbNotNotificacao" HorizontalAlignment="Left" Margin="338,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="293" Height="94" UndoLimit="0" TabIndex="3"/>
+                <Label x:Name="lbNumero_Copy14" Content="Notificação:" HorizontalAlignment="Left" Margin="323,81,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label x:Name="lbNumero_Copy15" Content="Floresta" HorizontalAlignment="Left" Margin="14,208,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label x:Name="lbNumero_Copy16" Content="Área Desmate:" HorizontalAlignment="Left" Margin="33,234,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNotFlorDesmate" HorizontalAlignment="Left" Margin="45,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="4"/>
+                <Label x:Name="lbNumero_Copy17" Content="Reposição Florestal:" HorizontalAlignment="Left" Margin="33,281,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNotFlorRep" HorizontalAlignment="Left" Margin="45,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="5"/>
+                <Label x:Name="lbNumero_Copy18" Content="Cerrado" HorizontalAlignment="Left" Margin="195,208,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label x:Name="lbNumero_Copy19" Content="Área Desmate:" HorizontalAlignment="Left" Margin="214,234,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNotCerDesmate" HorizontalAlignment="Left" Margin="226,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="6"/>
+                <Label x:Name="lbNumero_Copy20" Content="Reposição Florestal:" HorizontalAlignment="Left" Margin="214,281,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNotCerRep" HorizontalAlignment="Left" Margin="226,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="7"/>
+                <Label x:Name="lbNumero_Copy21" Content="Total Desmate:" HorizontalAlignment="Left" Margin="394,234,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNotTDesmate" HorizontalAlignment="Left" Margin="406,262,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="8"/>
+                <Label x:Name="lbNumero_Copy22" Content="Total Reposição Florestal:" HorizontalAlignment="Left" Margin="394,281,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <TextBox x:Name="txNotTRep" HorizontalAlignment="Left" Margin="406,309,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" FontSize="14" TabIndex="9"/>
+                <Button x:Name="btInfraPreencher_Copy" Content="Gerar Texto" HorizontalAlignment="Left" Height="20" Margin="589,287,0,0" VerticalAlignment="Top" Width="76" FontFamily="Times New Roman" Click="buscarModelos" TabIndex="10"/>
+            </Grid>
         </TabItem>
-        <TabItem x:Name="tbApreensao" Header="Termo de Apreensão" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" FontFamily="Times New Roman" Visibility="Collapsed">
-            <Grid Background="#FFE5E5E5"/>
+        <TabItem x:Name="tbApreensao" Header="Termo de Apreensão" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" FontFamily="Times New Roman" Visibility="Visible">
+            <Grid Background="#FFE5E5E5">
+                <Label x:Name="lbApreLivre" Content="Livre" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFFD0000" FontWeight="Bold" FontSize="14"/>
+                <CheckBox x:Name="cbApreLivre" Content="Mostrar #" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Foreground="Red"/>
+            </Grid>
         </TabItem>
-        <TabItem x:Name="tbDeposito" Header="Termo de Depósito" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="110" FontFamily="Times New Roman" Visibility="Collapsed">
-            <Grid Background="#FFE5E5E5"/>
+        <TabItem x:Name="tbDeposito" Header="Termo de Depósito" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" Width="110" FontFamily="Times New Roman" Visibility="Visible">
+            <Grid Background="#FFE5E5E5">
+                <Label x:Name="lbDepLivre" Content="Livre" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFFD0000" FontWeight="Bold" FontSize="14"/>
+                <CheckBox x:Name="cbDepLivre" Content="Mostrar #" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Foreground="Red"/>
+            </Grid>
         </TabItem>
-        <TabItem x:Name="tbEmbargo" Header="Termo de Embargo" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" IsSelected="True" Width="112.5" FontFamily="Times New Roman" Visibility="Collapsed">
-            <Grid Background="#FFE5E5E5"/>
+        <TabItem x:Name="tbEmbargo" Header="Termo de Embargo" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" IsSelected="True" Width="112.5" FontFamily="Times New Roman" Visibility="Visible">
+            <Grid Background="#FFE5E5E5">
+                <Label x:Name="lbEmbLivre" Content="Livre" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFFD0000" FontWeight="Bold" FontSize="14"/>
+                <CheckBox x:Name="cbEmbLivre" Content="Mostrar #" HorizontalAlignment="Left" Margin="50,7,0,0" VerticalAlignment="Top" Foreground="Red"/>
+            </Grid>
         </TabItem>
         <TabItem x:Name="tbGerar" Header="Gerar Auto" HorizontalAlignment="Center" Height="20" VerticalAlignment="Center" FontFamily="Times New Roman" Visibility="Visible">
             <Grid Background="#FFE5E5E5">
