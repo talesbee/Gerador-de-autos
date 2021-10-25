@@ -25,11 +25,12 @@ namespace Gerador_de_autos
     public partial class MainWindow : Window
     {
         String LocalModelos;
+        bool isActeve = false;
         public MainWindow()
         {
-
+            
             InitializeComponent();
-
+            
         }
 
         private void InicialConfig(bool status)
@@ -46,16 +47,16 @@ namespace Gerador_de_autos
             cbInfracao.IsEnabled = status;
             cbInspecao.IsEnabled = status;
             cbNotificacao.IsEnabled = status;
-            // cbApreensao.IsEnabled = status;
+            //cbApreensao.IsEnabled = status;
             //cbDeposito.IsEnabled = status;
-            //cbEmbargo.IsEnabled = status;
+            cbEmbargo.IsEnabled = status;
 
             cbInfracao.IsChecked = false;
             cbInspecao.IsChecked = false;
             cbNotificacao.IsChecked = false;
-            // cbApreensao.IsChecked = status;
-            //cbDeposito.IsChecked = status;
-            // cbEmbargo.IsChecked = status;
+            //cbApreensao.IsChecked = false;
+            //cbDeposito.IsChecked = false;
+            cbEmbargo.IsChecked = false;
 
 
             if (!status)
@@ -136,14 +137,13 @@ namespace Gerador_de_autos
 
 
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            dialog.InitialDirectory = "C:\\Users";
+            dialog.InitialDirectory = "%USERPROFILE%\\Documentos";
             dialog.IsFolderPicker = true;
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 DirectoryInfo diretorio = new DirectoryInfo(dialog.FileName);
                 FileInfo[] Arquivos = diretorio.GetFiles("*.*");
                 LocalModelos = dialog.FileName;
-                lbCaminhoLocal.Content = LocalModelos;
 
                 if (!arquivosEncontrados(Arquivos))
                     lbModelos.Content = "";
@@ -188,7 +188,7 @@ namespace Gerador_de_autos
         private void buscarSalvar(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
-            dialog.InitialDirectory = "C:\\Users";
+            dialog.InitialDirectory = "%USERPROFILE%\\Documentos";
             dialog.IsFolderPicker = true;
 
             if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
@@ -286,8 +286,8 @@ namespace Gerador_de_autos
 
         private void replaceGeral(DocX doc)
         {
-            doc.ReplaceText("#NomeAutuado", txNome.Text);
-            doc.ReplaceText("#CNPJ_CPFAutuado", txCnpjCpf.Text);
+            doc.ReplaceText("#NomeRS", txNome.Text);
+            doc.ReplaceText("#CpfCnpj", txCnpjCpf.Text);
             doc.ReplaceText("#DataDoAuto", dpData.Text);
             doc.ReplaceText("#horarioInfração", txHora.Text);
             doc.ReplaceText("#NomeDaMae", txFiliacao.Text);
@@ -297,7 +297,7 @@ namespace Gerador_de_autos
             doc.ReplaceText("#UfEmpreendimento", txUf.Text);
             doc.ReplaceText("#AreaEmpreendimento", txAreaEmpreendimento.Text);
             doc.ReplaceText("#Coordenada", txCoordenada.Text);
-            doc.ReplaceText("#Latitude ", txLat.Text);
+            doc.ReplaceText("#Latitude", txLat.Text);
             doc.ReplaceText("#Longitude", txLong.Text);
             doc.ReplaceText("#EnderecoCorrespondencia", txEnderecoCorrespondencia.Text);
             doc.ReplaceText("#MunicipioCorrespondencia", txMunicipioCorrespondencia.Text);
@@ -305,6 +305,9 @@ namespace Gerador_de_autos
             doc.ReplaceText("#CEPCorrespondencia", txCEP.Text);
             doc.ReplaceText("#Telefone", txTelefone.Text);
             doc.ReplaceText("#RepresentanteLegal", txNomeRepresentante.Text);
+            doc.ReplaceText("#NomeEmpreendimento", txNomeFant.Text);
+            doc.ReplaceText("#protocoloNotificacao", txProtocolo.Text);
+            doc.ReplaceText("#Setor", txSetor.Text);
         }
 
         private void replaceInfra(DocX infra)
@@ -323,7 +326,6 @@ namespace Gerador_de_autos
         private void replaceNot(DocX Not)
         {
             Not.ReplaceText("#nNotificacao", txNotNumero.Text);
-            Not.ReplaceText("#protocoloNotificacao", txNotProcesso.Text);
             Not.ReplaceText("#Objetivo", lbNotObjetivo.Text);
             Not.ReplaceText("#TxtNotif", lbNotNotificacao.Text);
             Not.ReplaceText("#AreaFDesmate", txNotFlorDesmate.Text);
@@ -341,6 +343,20 @@ namespace Gerador_de_autos
             Insp.ReplaceText("#Constatações", lbInspConsta.Text);
         }
 
+        private void replaceEmb(DocX Emb)
+        {
+            Emb.ReplaceText("#nAutoEmbargo", txEmbNumero.Text);
+            Emb.ReplaceText("#AreaDesmate ", txEmbAreaDesmate.Text);
+            Emb.ReplaceText("#RelatorioTecnico", txEmbRelatorio.Text);
+            Emb.ReplaceText("#AreaExplocacaoSeletiva", txEmbAreaExploracao.Text);
+            Emb.ReplaceText("#nAutoInfracao", txInfraNumero.Text);
+            Emb.ReplaceText("#Centroide", txEmbCentroide.Text);
+            Emb.ReplaceText("#FatosConst", lbEmbFatos.Text);
+            Emb.ReplaceText("#AtividadeEmbag", lbEmbAtividade.Text);
+            Emb.ReplaceText("#LocalEmbarg", lbEmbLocal.Text);
+            Emb.ReplaceText("#DLInfrig", lbEmbDispo.Text);
+        }
+
         private void replaceDocumento(string local)
         {
             DocX documento;
@@ -351,7 +367,6 @@ namespace Gerador_de_autos
                 documento = DocX.Load(arq);
                 replaceGeral(documento);
                 replaceInfra(documento);
-                Console.WriteLine(local);
                 nome = @"Auto de Infração - " + txInfraNumero.Text + ".docx";
                 arq = local + "\\";
                 salvarDoc(documento, arq, nome);
@@ -362,7 +377,6 @@ namespace Gerador_de_autos
                 documento = DocX.Load(arq);
                 replaceGeral(documento);
                 replaceNot(documento);
-                Console.WriteLine(local);
                 nome = @"Notificação - " + txNotNumero.Text + ".docx";
                 arq = local + "\\";
                 salvarDoc(documento, arq, nome);
@@ -373,8 +387,17 @@ namespace Gerador_de_autos
                 documento = DocX.Load(arq);
                 replaceGeral(documento);
                 replaceInspe(documento);
-                Console.WriteLine(local);
                 nome = @"Auto de Inspeção - " + txInspNumero.Text + ".docx";
+                arq = local + "\\";
+                salvarDoc(documento, arq, nome);
+            }
+            if (cbEmbargo.IsChecked.Value)
+            {
+                string arq = local + "\\Termo de Embargo.docx";
+                documento = DocX.Load(arq);
+                replaceGeral(documento);
+                replaceInspe(documento);
+                nome = @"Termo de Embargo - " + txEmbNumero.Text + ".docx";
                 arq = local + "\\";
                 salvarDoc(documento, arq, nome);
             }
@@ -389,85 +412,56 @@ namespace Gerador_de_autos
             }
         }
 
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            if (!isActeve)
+            {
+                InicialConfig(false);
+                isActeve = true;
+            }
+                
+        }
 
         /*
-private void Button_Click(object sender, RoutedEventArgs e)
-{
-   using(var documento = DocX.Load(caminho))
-   {
-       documento.ReplaceText("#nome", txNome.Text);
-       documento.ReplaceText("#numeroInfra", txNumeroInfra.Text);
-       documento.ReplaceText("#data", txData.Text);
-       documento.ReplaceText("#cnpjcpf", txCNPJCPF.Text);
-       documento.ReplaceText("#endereco", txEndereco.Text);
-       documento.ReplaceText("#municipio", txMunicipio.Text);
-       documento.ReplaceText("#uf", txUf.Text);
-       documento.ReplaceText("#area", txArea.Text);
-       documento.ReplaceText("#hora", txHorario.Text);
-       documento.ReplaceText("#coordenada", txCoordenada.Text);
-       documento.ReplaceText("#lat", txLat.Text);
-       documento.ReplaceText("#long", txLong.Text);
-       documento.ReplaceText("#endCor", txEnderecoCorrespondencias.Text);
-       documento.ReplaceText("#Cormunicipio", txMunicipioCorrespondencias.Text);
-       documento.ReplaceText("#cep", txCEP.Text);
-       documento.ReplaceText("#corUf", txUfCorrespondencias.Text);
-       documento.ReplaceText("#telefone", txTelefone.Text);
-       documento.ReplaceText("#aDes", txAreaAfetadaDes.Text);
-       documento.ReplaceText("#aExp", txAreaAfetadaExp.Text);
-       documento.ReplaceText("#NumRelatDesmate", txNumRelatDesmate.Text);
-       documento.ReplaceText("#NumRelatExp", txNumRelatExp.Text);
-       documento.ReplaceText("#nomFantasia", txNomeFant.Text);
-       documento.ReplaceText("#atividade", txAtividade.Text);
-       documento.ReplaceText("#endCor", txEnderecoCorrespondencias.Text);
-       documento.ReplaceText("#representante", txEnderecoCorrespondencias.Text);
-       documento.ReplaceText("#base", txBase.Text);
+
+        private void formatarCpfCnpj(object sender, RoutedEventArgs e)
+        {
+           string dados = txCNPJCPF.Text;
+           Console.WriteLine("cpf");
+
+           if (dados.Length <= 11)
+           {
+               if (dados.Length == 11)
+               {
+                   txCNPJCPF.Text = cpf(txCNPJCPF.Text);
+               }
+               else if (dados.Length == 14)
+               {
+                   txCNPJCPF.Text = cnpj(txCNPJCPF.Text);
+               }
+           }
 
 
+        }
+        public string cpf(string cpf)
+        {
+           return Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
+        }
+        public string cnpj(string cnpj)
+        {
+           return Convert.ToUInt64(cnpj).ToString(@"00\.000\.000\/0000\-00");
+        }
 
-
-       string nome = @"Auto - " + txNome.Text + ".docx";
-       documento.SaveAs(nome);
-   }
-}
-
-private void formatarCpfCnpj(object sender, RoutedEventArgs e)
-{
-   string dados = txCNPJCPF.Text;
-   Console.WriteLine("cpf");
-
-   if (dados.Length <= 11)
-   {
-       if (dados.Length == 11)
-       {
-           txCNPJCPF.Text = cpf(txCNPJCPF.Text);
-       }
-       else if (dados.Length == 14)
-       {
-           txCNPJCPF.Text = cnpj(txCNPJCPF.Text);
-       }
-   }
-
-
-}
-public string cpf(string cpf)
-{
-   return Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
-}
-public string cnpj(string cnpj)
-{
-   return Convert.ToUInt64(cnpj).ToString(@"00\.000\.000\/0000\-00");
-}
-
-private void formatarData(object sender, RoutedEventArgs e)
-{
-   string tamanho = txData.Text;
-   if(tamanho.Length == 7)
-       txData.Text = data(txData.Text);
-}
-public string data(string cnpj)
-{
-   return Convert.ToUInt64(cnpj).ToString(@"00\/00\/0000");
-}
-*/
+        private void formatarData(object sender, RoutedEventArgs e)
+        {
+           string tamanho = txData.Text;
+           if(tamanho.Length == 7)
+               txData.Text = data(txData.Text);
+        }
+        public string data(string cnpj)
+        {
+           return Convert.ToUInt64(cnpj).ToString(@"00\/00\/0000");
+        }
+        */
     }
 }

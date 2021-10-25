@@ -1,12 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Gerador_de_autos</RootNamespace>
+    <RootNamespace>Preenchedor_de_Autos</RootNamespace>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon />
+    <ApplicationIcon>engrenagem.ico</ApplicationIcon>
     <StartupObject />
+    <AssemblyName>Preenchedor de Autos</AssemblyName>
+    <NoWin32Manifest>true</NoWin32Manifest>
+    <Authors>Tales Iago Batista</Authors>
+    <Product />
+    <Company />
+    <Copyright>Uso livre</Copyright>
+    <Description>Feito por Tales a pedido de Tiago.</Description>
+    <NeutralLanguage>pt-BR</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
